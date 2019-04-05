@@ -53,6 +53,7 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/musicControls"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -61,7 +62,6 @@
         android:paddingStart="@dimen/space_md"
         android:paddingTop="@dimen/space_md"
         android:paddingEnd="@dimen/space_md"
-        android:paddingRight=" "
         android:paddingBottom="@dimen/space_lg">
 
         <ImageView
@@ -99,5 +99,70 @@
             android:layout_weight="20"
             app:srcCompat="@drawable/repeat" />
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/songDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/musicControls"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                app:srcCompat="@drawable/info" />
+
+            <ImageView
+                android:id="@+id/add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                app:srcCompat="@drawable/plus" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/add"
+                android:layout_toEndOf="@+id/info"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/songName" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/songArtist" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/coverImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/songDetails"
+        android:layout_below="@+id/toolbar"
+        app:srcCompat="@drawable/cover" />
 
 </RelativeLayout>
