@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Progra3Demo2019</string>
+
+    <string name="title">Playing from playlist</string>
+    <string name="subtitle">Mine</string>
+
+    <string name="songName">When I\'ve gone</string>
+    <string name="songArtist">Linkin Park</string>
 </resources>
