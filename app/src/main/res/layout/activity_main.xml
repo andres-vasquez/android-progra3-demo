@@ -189,6 +189,7 @@
                 tools:text="03:25" />
 
             <android.support.v7.widget.AppCompatSeekBar
+                android:id="@+id/songTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/space_lg"
@@ -199,6 +200,7 @@
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/coverImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/songInfo"
