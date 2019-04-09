@@ -11,7 +11,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class PlayActivity extends AppCompatActivity {
 
     private Context mContext;
 
