@@ -8,10 +8,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+
+import edu.upb.progra3demo.model.User;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Context mContext;
+    private User mUser;
 
     private EditText mUsuarioEditText;
     private EditText mPasswordEditText;
@@ -26,6 +32,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         initViews();
         addEvents();
+        //createObject();
+        createObjectFromString();
     }
 
     private void initViews() {
@@ -48,5 +56,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         intent.putExtra(Constants.KEY_USUARIO, usuario);
         intent.putExtra(Constants.KEY_PASSWORD, password);
         startActivity(intent);
+    }
+
+    private void createObject() {
+        mUser = new User();
+        mUser.setNombreUsuario("dilanAA");
+        mUser.setPassword("bbcita420");
+        mUser.setEdad(19);
+        mUser.setEmail("nalid102@gmail.com");
+        mUser.setCodigoUpb(46478);
+
+        String json = new Gson().toJson(mUser);
+        Log.e("Mi Usuario", json);
+    }
+
+    private void createObjectFromString() {
+        String json = "{\"nombreUsuario\":\"IgnacioElBroko\",\"password\":\"todopoderosoYO\",\"edad\":19,\"email\":\"nachitotigredelriozenteno@gmail.com\",\"codigoUpb\":46036,\"celular\":77511999}";
+        mUser = new Gson().fromJson(json, User.class);
+        Toast.makeText(mContext, mUser.getPassword(), Toast.LENGTH_LONG).show();
     }
 }
