@@ -39,5 +39,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_xl"
             android:text="Iniciar sesion" />
+
+        <Button
+            android:id="@+id/registrar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="registrarClick"
+            android:text="Registrar" />
     </LinearLayout>
+
 </RelativeLayout>

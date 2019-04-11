@@ -2,6 +2,7 @@ package edu.upb.progra3demo;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -74,5 +75,29 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String json = "{\"nombreUsuario\":\"IgnacioElBroko\",\"password\":\"todopoderosoYO\",\"edad\":19,\"email\":\"nachitotigredelriozenteno@gmail.com\",\"codigoUpb\":46036,\"celular\":77511999}";
         mUser = new Gson().fromJson(json, User.class);
         Toast.makeText(mContext, mUser.getPassword(), Toast.LENGTH_LONG).show();
+    }
+
+    public void registrarClick(View view) {
+        Toast.makeText(mContext, "El click funciona", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(mContext, RegisterActivity.class);
+        startActivityForResult(intent, Constants.CODIGO_TRANSACCION);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == Constants.CODIGO_TRANSACCION) {
+            if (resultCode == RESULT_OK) {
+                if (data != null) {
+                    String json = data.getStringExtra(Constants.KEY_REGISTRAR_USUARIO);
+                    Log.e("Usuario recibido", json);
+
+                    User usuarioRecibido = new Gson().fromJson(json, User.class);
+                    mUsuarioEditText.setText(usuarioRecibido.getNombreUsuario());
+                    mPasswordEditText.setText(usuarioRecibido.getPassword());
+                }
+            }
+        }
     }
 }

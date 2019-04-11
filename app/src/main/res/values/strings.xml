@@ -6,4 +6,13 @@
 
     <string name="songName">When I\'ve gone</string>
     <string name="songArtist">Linkin Park</string>
+
+    <string name="usuario">Ingrese su usuario</string>
+    <string name="password">Ingrese su password</string>
+    <string name="edad">Ingrese su edad</string>
+    <string name="email">Ingrese su email</string>
+    <string name="codigoUpb">Ingrese su código UPB</string>
+
+    <string name="enviar">Enviar</string>
+    <string name="limpiar">Limpiar</string>
 </resources>
