@@ -2,6 +2,7 @@ package edu.upb.progra3demo;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -81,6 +82,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Toast.makeText(mContext, "El click funciona", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(mContext, RegisterActivity.class);
         startActivityForResult(intent, Constants.CODIGO_TRANSACCION);
+    }
+
+    public void llamarAJordiClick(View view) {
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + "78898825"));
+        startActivity(intent);
+    }
+
+    public void llevameAlaU(View view) {
+        String name = "Campus UPB";
+        Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                Uri.parse("geo:0,0?q=-16.575137, -68.126868 (" + name + ")"));
+        startActivity(intent);
     }
 
     @Override

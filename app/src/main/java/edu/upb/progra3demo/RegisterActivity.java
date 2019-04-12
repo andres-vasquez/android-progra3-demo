@@ -206,7 +206,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         Intent intent = new Intent();
         intent.putExtra(Constants.KEY_REGISTRAR_USUARIO, json);
-        setResult(RESULT_OK, intent);
-        finish();
+        setResult(RESULT_OK, intent); //OK: funciono, intent --> retornando el valor
+        finish(); //Cierra el activity
     }
 }
