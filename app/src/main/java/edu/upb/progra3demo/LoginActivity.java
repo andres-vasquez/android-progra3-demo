@@ -90,10 +90,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void llevameAlaU(View view) {
-        String name = "Campus UPB";
+        /*String name = "Campus UPB";
         Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
                 Uri.parse("geo:0,0?q=-16.575137, -68.126868 (" + name + ")"));
-        startActivity(intent);
+        startActivity(intent);*/
+
+        String url = "http://www.upb.edu/";
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        startActivity(i);
     }
 
     @Override
