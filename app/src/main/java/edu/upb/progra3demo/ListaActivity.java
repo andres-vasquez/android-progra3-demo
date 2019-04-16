@@ -12,6 +12,8 @@ import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +26,7 @@ public class ListaActivity extends AppCompatActivity {
 
     private Spinner genero;
     private ListView canciones;
+    private SongAdapter cancionesAdapter;
 
     private List<String> generos = new ArrayList<>();
     private List<Song> cancionesArray = new ArrayList<>();
@@ -67,7 +70,7 @@ public class ListaActivity extends AppCompatActivity {
 
         canciones = findViewById(R.id.canciones);
 
-        SongAdapter cancionesAdapter = new SongAdapter(mContext, cancionesArray);
+        cancionesAdapter = new SongAdapter(mContext, cancionesArray);
         canciones.setAdapter(cancionesAdapter);
     }
 
@@ -78,11 +81,27 @@ public class ListaActivity extends AppCompatActivity {
                 Toast.makeText(mContext,
                         "Se selecciono la opcion: " + generos.get(position),
                         Toast.LENGTH_SHORT).show();
+
+                //Nueva cancion
+                Song song = new Song(cancionesArray.size() + 1, R.drawable.losangeles,
+                        "17 anios", "Los angeles azules");
+                cancionesArray.add(song);//Adicionamos a la lista
+                cancionesAdapter.notifyDataSetChanged(); //Adapter --> algo cambio
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+
+        canciones.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Song song = cancionesArray.get(position); //Obtener cual cancion
+                Intent intent = new Intent(mContext, PlayActivity.class); //Iniciar intent
+                intent.putExtra(Constants.KEY_CANCION, new Gson().toJson(song)); //Cargar la data en String (serializada)
+                startActivity(intent);
             }
         });
     }

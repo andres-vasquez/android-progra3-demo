@@ -1,6 +1,7 @@
 package edu.upb.progra3demo;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatSeekBar;
@@ -10,6 +11,10 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
+
+import edu.upb.progra3demo.model.Song;
 
 public class PlayActivity extends AppCompatActivity {
 
@@ -31,6 +36,7 @@ public class PlayActivity extends AppCompatActivity {
         initViews();
         addEvents();
         modifyContent();
+        receiveData();
     }
 
     private void initViews() {
@@ -76,5 +82,14 @@ public class PlayActivity extends AppCompatActivity {
         songArtist.setText("Barak");
         songName.setText("Cantaremos");
         coverImage.setImageResource(R.drawable.barak);
+    }
+
+    private void receiveData() {
+        Intent intent = getIntent();
+        String json = intent.getStringExtra(Constants.KEY_CANCION);
+        Song song = new Gson().fromJson(json, Song.class);
+        songArtist.setText(song.getSongArtist());
+        songName.setText(song.getSongTitle());
+        coverImage.setImageResource(song.getCoverImage());
     }
 }
