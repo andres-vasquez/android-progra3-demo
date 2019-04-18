@@ -22,7 +22,7 @@ import com.google.gson.Gson;
 import edu.upb.progra3demo.model.User;
 
 public class RegisterActivity extends AppCompatActivity {
-
+    private static final String LOG = RegisterActivity.class.getName();
     private Context mContext;
 
     private LinearLayout padre;
@@ -49,6 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.w(LOG, "onCreate");
 
         mContext = this;
 
@@ -140,6 +141,42 @@ public class RegisterActivity extends AppCompatActivity {
 
         setContentView(padre);
         addEvents();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.w(LOG, "onStart");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.w(LOG, "onPause");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.w(LOG, "onResume");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.w(LOG, "onStop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.w(LOG, "onDestroy");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.w(LOG, "onRestart");
     }
 
     private void addEvents() {

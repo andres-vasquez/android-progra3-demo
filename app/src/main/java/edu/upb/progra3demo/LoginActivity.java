@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import edu.upb.progra3demo.model.User;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String LOG = LoginActivity.class.getName();
 
     private Context mContext;
     private User mUser;
@@ -29,6 +30,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.w(LOG, "onCreate");
+
         setContentView(R.layout.activity_login);
         mContext = this;
 
@@ -36,6 +39,42 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         addEvents();
         //createObject();
         createObjectFromString();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.w(LOG, "onStart");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.w(LOG, "onPause");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.w(LOG, "onResume");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.w(LOG, "onStop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.w(LOG, "onDestroy");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.w(LOG, "onRestart");
     }
 
     private void initViews() {
