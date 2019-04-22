@@ -141,6 +141,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         setContentView(padre);
         addEvents();
+        getDataFromIntent();
     }
 
     @Override
@@ -245,5 +246,18 @@ public class RegisterActivity extends AppCompatActivity {
         intent.putExtra(Constants.KEY_REGISTRAR_USUARIO, json);
         setResult(RESULT_OK, intent); //OK: funciono, intent --> retornando el valor
         finish(); //Cierra el activity
+    }
+
+    private void getDataFromIntent() {
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        String type = intent.getType();
+
+        if (Intent.ACTION_SEND.equals(action) && type != null) {
+            if ("text/plain".equals(type)) {
+                String texto = intent.getStringExtra(Intent.EXTRA_TEXT);
+                usuario.setText(texto);
+            }
+        }
     }
 }

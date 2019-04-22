@@ -6,5 +6,7 @@ public class Constants {
     public static final String KEY_REGISTRAR_USUARIO = "registrarUsuario";
     public static final String KEY_CANCION = "cancionSeleccionada";
 
+    //Mayores a 100
     public static final int CODIGO_TRANSACCION = 410;
+    public static final int CODIGO_TRANSACCION_FOTO = 411;
 }

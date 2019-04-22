@@ -11,23 +11,51 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="llamarAJordiClick"
-            android:text="Llamar a Jordi"
-            android:textSize="18sp" />
+            android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="0dp"
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="compartirTextClick"
+                android:text="Compartir texto"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="tomarUnaFotoClick"
+                android:text="Tomar una foto"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="llevameAlaU"
-            android:text="Llevame a la U"
-            android:textSize="18sp" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="llamarAJordiClick"
+                android:text="Llamar a Jordi"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="llevameAlaU"
+                android:text="Llevame a la U"
+                android:textSize="18sp" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -37,6 +65,7 @@
         android:orientation="vertical">
 
         <ImageView
+            android:id="@+id/foto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/space_lg"
@@ -70,5 +99,4 @@
             android:onClick="registrarClick"
             android:text="Registrar" />
     </LinearLayout>
-
 </RelativeLayout>

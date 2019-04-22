@@ -1,8 +1,13 @@
 package edu.upb.progra3demo;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.media.Image;
 import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,9 +15,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+
+import java.io.File;
 
 import edu.upb.progra3demo.model.User;
 
@@ -22,10 +30,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Context mContext;
     private User mUser;
 
+    private ImageView mFotoImageView;
+
     private EditText mUsuarioEditText;
     private EditText mPasswordEditText;
 
     private Button mIniciarSesionButton;
+
+    private Uri imageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +90,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void initViews() {
+        mFotoImageView = findViewById(R.id.foto);
         mUsuarioEditText = findViewById(R.id.usuario);
         mPasswordEditText = findViewById(R.id.password);
         mIniciarSesionButton = findViewById(R.id.iniciarSesion);
@@ -128,6 +141,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         startActivity(intent);
     }
 
+    public void compartirTextClick(View view) {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_TEXT, "Hola muchachos!");
+        intent.setType("text/plain");
+        startActivity(intent);
+
+    }
+
+    public void tomarUnaFotoClick(View view) {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        /*File photo = new File(Environment.getExternalStorageDirectory(), "progra3.jpg");
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photo));
+        imageUri = Uri.fromFile(photo);*/
+        startActivityForResult(intent, Constants.CODIGO_TRANSACCION_FOTO);
+    }
+
     public void llevameAlaU(View view) {
         /*String name = "Campus UPB";
         Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
@@ -145,6 +175,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == Constants.CODIGO_TRANSACCION) {
+            //Objeto usuario
             if (resultCode == RESULT_OK) {
                 if (data != null) {
                     String json = data.getStringExtra(Constants.KEY_REGISTRAR_USUARIO);
@@ -154,6 +185,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     mUsuarioEditText.setText(usuarioRecibido.getNombreUsuario());
                     mPasswordEditText.setText(usuarioRecibido.getPassword());
                 }
+            }
+        } else if (requestCode == Constants.CODIGO_TRANSACCION_FOTO) {
+            //Foto
+            if (resultCode == RESULT_OK) {
+                Log.e("Foto", "Valida");
+                /*Uri selectedImage = data.getData();
+                ContentResolver cr = getContentResolver();
+                Bitmap bitmap;
+                try {
+                    bitmap = android.provider.MediaStore.Images.Media
+                            .getBitmap(cr, selectedImage);
+                    mFotoImageView.setImageBitmap(bitmap);
+                    Toast.makeText(this, selectedImage.toString(),
+                            Toast.LENGTH_LONG).show();
+                } catch (Exception e) {
+                    Toast.makeText(this, "Failed to load", Toast.LENGTH_SHORT)
+                            .show();
+                    Log.e("Camera", e.toString());
+                }*/
+            } else {
+                Log.e("Foto cancelada", "Canceled");
             }
         }
     }
