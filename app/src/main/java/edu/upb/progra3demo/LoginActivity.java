@@ -152,9 +152,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public void tomarUnaFotoClick(View view) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        /*File photo = new File(Environment.getExternalStorageDirectory(), "progra3.jpg");
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photo));
-        imageUri = Uri.fromFile(photo);*/
         startActivityForResult(intent, Constants.CODIGO_TRANSACCION_FOTO);
     }
 
@@ -190,20 +187,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             //Foto
             if (resultCode == RESULT_OK) {
                 Log.e("Foto", "Valida");
-                /*Uri selectedImage = data.getData();
-                ContentResolver cr = getContentResolver();
-                Bitmap bitmap;
-                try {
-                    bitmap = android.provider.MediaStore.Images.Media
-                            .getBitmap(cr, selectedImage);
-                    mFotoImageView.setImageBitmap(bitmap);
-                    Toast.makeText(this, selectedImage.toString(),
-                            Toast.LENGTH_LONG).show();
-                } catch (Exception e) {
-                    Toast.makeText(this, "Failed to load", Toast.LENGTH_SHORT)
-                            .show();
-                    Log.e("Camera", e.toString());
-                }*/
+                Bitmap thumbnail = data.getParcelableExtra("data"); // Obtenemos el Bitmap (imagen) capturada
+                // Mostramos nuestra imagen en el imageView
+                mFotoImageView.setImageBitmap(thumbnail);
             } else {
                 Log.e("Foto cancelada", "Canceled");
             }
