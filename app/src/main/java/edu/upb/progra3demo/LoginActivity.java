@@ -3,10 +3,12 @@ package edu.upb.progra3demo;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -106,10 +108,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String password = mPasswordEditText.getText().toString();
         Log.e("Mis datos", usuario + " " + password);
 
-        Intent intent = new Intent(mContext, ListaActivity.class);
-        intent.putExtra(Constants.KEY_USUARIO, usuario);
-        intent.putExtra(Constants.KEY_PASSWORD, password);
-        startActivity(intent);
+        if (validarUsuario(usuario, password)) {
+            Intent intent = new Intent(mContext, ListaActivity.class);
+            intent.putExtra(Constants.KEY_USUARIO, usuario);
+            intent.putExtra(Constants.KEY_PASSWORD, password);
+            startActivity(intent);
+        } else {
+            Toast.makeText(mContext, "Usuario o password invalido", Toast.LENGTH_SHORT)
+                    .show();
+        }
     }
 
     private void createObject() {
@@ -194,5 +201,29 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Log.e("Foto cancelada", "Canceled");
             }
         }
+    }
+
+
+    private boolean validarUsuario(String usuario, String password) {
+        if (usuario == null || usuario.isEmpty()) {
+            return false;
+        }
+
+        if (password == null || password.isEmpty()) {
+            return false;
+        }
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
+        String usuarioGuardado = prefs.getString(Constants.PREF_USUARIO, "");
+        String passwordGuardado = prefs.getString(Constants.PREF_PASSWORD, "");
+
+        return usuario.equals(usuarioGuardado) && password.equals(passwordGuardado);
+    }
+
+    public void eliminarDatos(View view) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.clear();
+        editor.apply();
     }
 }
