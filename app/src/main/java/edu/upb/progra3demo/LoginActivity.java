@@ -24,6 +24,7 @@ import com.google.gson.Gson;
 
 import java.io.File;
 
+import edu.upb.progra3demo.db.DatabaseHelper;
 import edu.upb.progra3demo.model.User;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -213,11 +214,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return false;
         }
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
+        /*SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
         String usuarioGuardado = prefs.getString(Constants.PREF_USUARIO, "");
         String passwordGuardado = prefs.getString(Constants.PREF_PASSWORD, "");
 
-        return usuario.equals(usuarioGuardado) && password.equals(passwordGuardado);
+        return usuario.equals(usuarioGuardado) && password.equals(passwordGuardado);*/
+
+        DatabaseHelper dbHelper = new DatabaseHelper(this.mContext);
+        return dbHelper.login(usuario, password);
     }
 
     public void eliminarDatos(View view) {
