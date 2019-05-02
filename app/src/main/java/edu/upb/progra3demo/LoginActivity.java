@@ -23,7 +23,9 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import java.io.File;
+import java.util.List;
 
+import edu.upb.progra3demo.db.DatabaseHelper;
 import edu.upb.progra3demo.model.User;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -40,6 +42,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button mIniciarSesionButton;
 
     private Uri imageUri;
+    private DatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         addEvents();
         //createObject();
         createObjectFromString();
+        dbHelper = new DatabaseHelper(mContext);
     }
 
     @Override
@@ -213,11 +217,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return false;
         }
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
+        return dbHelper.login(usuario, password);
+
+        /*SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
         String usuarioGuardado = prefs.getString(Constants.PREF_USUARIO, "");
         String passwordGuardado = prefs.getString(Constants.PREF_PASSWORD, "");
 
-        return usuario.equals(usuarioGuardado) && password.equals(passwordGuardado);
+        return usuario.equals(usuarioGuardado) && password.equals(passwordGuardado);*/
     }
 
     public void eliminarDatos(View view) {

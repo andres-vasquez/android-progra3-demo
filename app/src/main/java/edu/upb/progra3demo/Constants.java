@@ -13,4 +13,7 @@ public class Constants {
     //Shared preferences
     public static final String PREF_USUARIO = "usuario";
     public static final String PREF_PASSWORD = "password";
+
+    public static final String DATABASE_NAME = "progra3.db";
+    public static final int DATABASE_VERSION = 1;
 }

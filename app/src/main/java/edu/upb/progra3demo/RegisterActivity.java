@@ -28,6 +28,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 
+import edu.upb.progra3demo.db.DatabaseHelper;
 import edu.upb.progra3demo.model.User;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -304,6 +305,9 @@ public class RegisterActivity extends AppCompatActivity {
         alumno.setEdad(Integer.parseInt(edad.getText().toString()));
         alumno.setEmail(email.getText().toString());
         alumno.setCodigoUpb(Integer.parseInt(codigoUpb.getText().toString()));
+
+        DatabaseHelper dbHelper = new DatabaseHelper(mContext);
+        dbHelper.insert(alumno);
 
         String json = new Gson().toJson(alumno);
         Log.e("UsuarioEnviado", json);
