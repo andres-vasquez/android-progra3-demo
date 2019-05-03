@@ -4,6 +4,8 @@ import com.google.gson.annotations.Expose;
 
 public class User {
 
+    private int id;
+
     @Expose
     private String nombreUsuario;
 
@@ -18,6 +20,14 @@ public class User {
 
     @Expose
     private int codigoUpb;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNombreUsuario() {
         return nombreUsuario;

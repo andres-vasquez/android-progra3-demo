@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import java.io.File;
+import java.util.List;
 
 import edu.upb.progra3demo.db.DatabaseHelper;
 import edu.upb.progra3demo.model.User;
@@ -41,6 +42,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button mIniciarSesionButton;
 
     private Uri imageUri;
+    private DatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         addEvents();
         //createObject();
         createObjectFromString();
+
+        dbHelper = new DatabaseHelper(mContext);
+        int cantidad = dbHelper.getCount();
+        Toast.makeText(mContext,
+                "Existen: " + cantidad + " de usuarios registrados",
+                Toast.LENGTH_SHORT).show();
+
+        //TODO solo con fines academicos no hacer esto
+        thanos();
     }
 
     @Override
@@ -229,5 +240,38 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         SharedPreferences.Editor editor = prefs.edit();
         editor.clear();
         editor.apply();
+    }
+
+    public void thanos() {
+        //Obtenemos la lista de usuarios
+        final List<User> usuarios = dbHelper.getAll();
+        Log.e("LISTA usuarios", new Gson().toJson(usuarios));
+
+        //Si hubieran datos
+        if (usuarios.size() > 0) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        //Esperamos 3 segundos
+                        Thread.sleep(3000);
+
+                        //Obtenemos el primero
+                        User primerUsuario = usuarios.get(0);
+                        //Lo borramos!!!!! xD
+                        dbHelper.delete(primerUsuario.getId());
+
+                        //Esperamos 1 segundo mas
+                        Thread.sleep(3000);
+                        //Obtenemos la nueva cantidad
+                        int cantidad = dbHelper.getCount();
+                        //Mostramos la nueva cantidad
+                        Log.e("AHORA", "Ahora existen: " + cantidad + " de usuarios registrados");
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        }
     }
 }
